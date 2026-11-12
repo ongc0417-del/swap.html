@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>USDT换TRX</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+body{background:#f5f5f5;color:#333;padding:16px}
+.header{background:#fff;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #eee;position:sticky;top:0;z-index:100;margin:-16px -16px 16px}
+.header .title{font-size:17px;font-weight:600}
+.header .close{color:#007aff;font-size:16px}
+.section{background:#fff;padding:16px;border-radius:12px}
+.section-title{font-size:15px;font-weight:500;margin-bottom:12px;text-align:center}
+.input-box{background:#f8f8f8;border:1px solid #eee;border-radius:10px;padding:12px;min-height:48px;font-size:15px;width:100%;margin-bottom:12px}
+.btn{background:#e6a23c;color:#fff;border:none;border-radius:25px;padding:14px;font-size:16px;width:100%;margin-top:8px}
+.price{text-align:center;color:#2ecc71;margin-bottom:16px;font-size:15px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="close" onclick="tg.close()">关闭</span>
+  <span class="title">USDT换TRX</span>
+  <span></span>
+</div>
+
+<div class="section">
+  <div class="section-title">USDT 换 TRX</div>
+  <div class="price">当前价格 1 USDT ≈ 3.15 TRX</div>
+  <input id="usdtAmount" class="input-box" placeholder="输入 USDT 数量" oninput="calc()">
+  <input id="trxAmount" class="input-box" placeholder="预计获得 TRX" readonly>
+  <input id="receiveAddress" class="input-box" placeholder="接收 TRX 地址">
+  <button class="btn" onclick="submitSwap()">立即兑换</button>
+</div>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
+tg.expand();
+
+function calc(){
+  const usdt = parseFloat(document.getElementById('usdtAmount').value) || 0;
+  document.getElementById('trxAmount').value = (usdt * 3.15).toFixed(2);
+}
+
+function submitSwap(){
+  const addr = document.getElementById('receiveAddress').value.trim();
+  if(!addr){
+    alert('请填写接收地址');
+    return;
+  }
+  alert('兑换已提交');
+}
+</script>
+</body>
+</html>
